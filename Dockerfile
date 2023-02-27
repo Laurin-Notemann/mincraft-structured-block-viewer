@@ -8,11 +8,12 @@ COPY package*.json .
 
 RUN npm install
 
-# RUN npm run build
+COPY prisma .
+
+COPY .env .
 
 RUN npx prisma generate
 
-ENV DATABASE_URL = "mongodb://mongo1:27017/minecraftnbtviewer"
-
 EXPOSE 5173
+
 EXPOSE 24678

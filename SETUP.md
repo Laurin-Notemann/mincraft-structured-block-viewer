@@ -40,3 +40,9 @@ and to run again:
 ```bash
 docker compose up -d --build
 ```
+
+Whenever you change your schema.prisma file you should run the following script inside of your docker container
+
+```
+npx prisma db push
+```

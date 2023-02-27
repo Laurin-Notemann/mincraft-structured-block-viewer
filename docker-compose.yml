@@ -2,35 +2,57 @@ services:
   mongo1:
     container_name: mcmongo1
     image: mongo:6
+    ports:
+      - "27018:27017"
     volumes:
       - ./scripts/rs-init.sh:/scripts/rs-init.sh
       - ./scripts/init.js:/scripts/init.js
     restart: always
-    entrypoint: ['/usr/bin/mongod', '--bind_ip_all', '--replSet', 'mcviewSet']
+    entrypoint:
+      [
+        '/usr/bin/mongod',
+        '--bind_ip_all',
+        '--replSet',
+        'mcviewSet'
+      ]
 
   mongo2:
     container_name: mcmongo2
     image: mongo:6
     restart: always
-    entrypoint: ['/usr/bin/mongod', '--bind_ip_all', '--replSet', 'mcviewSet']
+    entrypoint:
+      [
+        '/usr/bin/mongod',
+        '--bind_ip_all',
+        '--replSet',
+        'mcviewSet'
+      ]
   mongo3:
     container_name: mcmongo3
     image: mongo:6
     restart: always
-    entrypoint: ['/usr/bin/mongod', '--bind_ip_all', '--replSet', 'mcviewSet']
+    entrypoint:
+      [
+        '/usr/bin/mongod',
+        '--bind_ip_all',
+        '--replSet',
+        'mcviewSet'
+      ]
   minecraft_viewer:
     container_name: minecraft_viewer
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile
     restart: always
     volumes:
+      - ./scripts:/app/scripts
       - ./src:/app/src
       - ./static:/app/static
       - ./vite.config.js:/app/vite.config.js
       - ./tsconfig.json:/app/tsconfig.json
       - ./svelte.config.js:/app/svelte.config.js
       - ./.svelte-kit:/app/.svelte-kit
+      - ./prisma:/app/prisma
     ports:
       - 5173:5173
     environment:
