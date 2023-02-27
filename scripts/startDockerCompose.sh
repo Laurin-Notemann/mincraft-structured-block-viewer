@@ -1,7 +1,5 @@
 DELAY=2
 
-docker build -t minecraftviewerimage .
-
 docker-compose --file docker-compose.yml down
 
 docker-compose --file docker-compose.yml up -d --build

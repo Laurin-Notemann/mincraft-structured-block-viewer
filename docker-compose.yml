@@ -20,7 +20,9 @@ services:
     entrypoint: ['/usr/bin/mongod', '--bind_ip_all', '--replSet', 'mcviewSet']
   minecraft_viewer:
     container_name: minecraft_viewer
-    image: minecraftviewerimage
+    build: 
+      context: .
+      dockerfile: Dockerfile
     restart: always
     volumes:
       - ./src:/app/src
@@ -28,6 +30,7 @@ services:
       - ./vite.config.js:/app/vite.config.js
       - ./tsconfig.json:/app/tsconfig.json
       - ./svelte.config.js:/app/svelte.config.js
+      - ./.svelte-kit:/app/.svelte-kit
     ports:
       - 5173:5173
     environment:

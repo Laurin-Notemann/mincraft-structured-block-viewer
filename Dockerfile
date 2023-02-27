@@ -16,5 +16,3 @@ ENV DATABASE_URL = "mongodb://mongo1:27017/minecraftnbtviewer"
 
 EXPOSE 5173
 EXPOSE 24678
-
-# CMD ["npx", "vite", "dev", "--host", "0.0.0.0"]
